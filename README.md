@@ -3,7 +3,7 @@
 **本项目为基于CNN，RNN 和NLP中预训练模型构建的多个常见的文本分类模型。**
 
 #### requirements
-* python==
+* python==3.5.6
 * tensorflow==1.4.0
 
 #### 1. 数据集
