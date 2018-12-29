@@ -89,7 +89,7 @@ For Semi-Supervised Text Classification](https://arxiv.org/abs/1605.07725)
 
 &ensp;&ensp;adversarialLSTM的代码在/adversarialLSTM/adversarialLSTM.ipynb中。
 
-####10. Transformer Encoder 文本分类
+#### 10. Transformer 文本分类
 &ensp;&ensp;敬请期待
 #### 11. ELMo预训练模型 文本分类
 &ensp;&ensp;敬请期待
