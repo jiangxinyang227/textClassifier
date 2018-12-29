@@ -2,6 +2,10 @@
 ***
 **本项目为基于CNN，RNN 和NLP中预训练模型构建的多个常见的文本分类模型。**
 
+#### requirements
+* python==
+* tensorflow==1.4.0
+
 #### 1. 数据集
 &ensp;&ensp;数据集为IMDB电影评论的情感分析数据集，总共有三个部分：
 * 带标签的训练集：labeledTrainData.tsv
