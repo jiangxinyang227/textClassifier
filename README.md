@@ -84,7 +84,7 @@ Relation Classification](http://aclweb.org/anthology/Y/Y15/Y15-1009.pdf)
 &ensp;&ensp;RCNN的代码在/RCNN/RCNN.ipynb中。
 
 #### 9. adversarialLSTM 文本分类
-&ensp;&ensp;RCNN模型来源于论文[Adversarial Training Methods
+&ensp;&ensp;Adversarial LSTM模型来源于论文[Adversarial Training Methods
 For Semi-Supervised Text Classification](https://arxiv.org/abs/1605.07725)
 
 &ensp;&ensp;adversarialLSTM的核心思想是通过对word Embedding上添加噪音生成对抗样本，将对抗样本以和原始样本
@@ -94,7 +94,13 @@ For Semi-Supervised Text Classification](https://arxiv.org/abs/1605.07725)
 &ensp;&ensp;adversarialLSTM的代码在/adversarialLSTM/adversarialLSTM.ipynb中。
 
 #### 10. Transformer 文本分类
-&ensp;&ensp;敬请期待
+&ensp;&ensp;Transformer模型来源于论文[Attention Is All You Need](https://arxiv.org/abs/1706.03762)
+
+&ensp;&ensp;Transformer模型有两个结构：Encoder和Decoder，在进行文本分类时只需要用到
+Encoder结构，Decoder结构是生成式模型，用于自然语言生成的。Transformer的核心结构是
+self-Attention机制，具体的介绍见[Transformer模型（Atention is all you need）](https://www.cnblogs.com/jiangxinyang/p/10069330.html)。
+
+&ensp;&ensp;Transformer模型的代码在/adversarialLSTM/adversarialLSTM.ipynb中。
 #### 11. ELMo预训练模型 文本分类
 &ensp;&ensp;敬请期待
 #### 12. Bert预训练模型 文本分类
