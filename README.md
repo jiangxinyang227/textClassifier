@@ -100,7 +100,7 @@ For Semi-Supervised Text Classification](https://arxiv.org/abs/1605.07725)
 Encoder结构，Decoder结构是生成式模型，用于自然语言生成的。Transformer的核心结构是
 self-Attention机制，具体的介绍见[Transformer模型（Atention is all you need）](https://www.cnblogs.com/jiangxinyang/p/10069330.html)。
 
-&ensp;&ensp;Transformer模型的代码在/adversarialLSTM/adversarialLSTM.ipynb中。
+&ensp;&ensp;Transformer模型的代码在/Transformer/transformer.ipynb中。
 #### 11. ELMo预训练模型 文本分类
 &ensp;&ensp;敬请期待
 #### 12. Bert预训练模型 文本分类
