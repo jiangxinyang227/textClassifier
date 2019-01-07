@@ -101,8 +101,16 @@ Encoder结构，Decoder结构是生成式模型，用于自然语言生成的。
 self-Attention机制，具体的介绍见[Transformer模型（Atention is all you need）](https://www.cnblogs.com/jiangxinyang/p/10069330.html)。
 
 &ensp;&ensp;Transformer模型的代码在/Transformer/transformer.ipynb中。
+
 #### 11. ELMo预训练模型 文本分类
-&ensp;&ensp;敬请期待
+&ensp;&ensp;ELMo模型来源于论文[Deep contextualized word representations](https://arxiv.org/abs/1802.05365?context=cs)
+
+&ensp;&ensp;ELMo的结构是BiLM（双向语言模型），基于ELMo的预训练模型能动态地生成
+词的向量表示，具体的介绍见[ELMO模型（Deep contextualized word representation）](https://www.cnblogs.com/jiangxinyang/p/10060887.html)
+
+&ensp;&ensp;ELMo预训练模型用于文本分类的代码位于/ELMo/elmo.ipynb中。
+/ELMo/bilm/下是ELMo项目中的源码，/ELMo/modelParams/下是各种文件。
+
 #### 12. Bert预训练模型 文本分类
 &ensp;&ensp;敬请期待
 
