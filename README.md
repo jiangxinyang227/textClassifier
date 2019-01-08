@@ -123,7 +123,24 @@ Language Understanding](https://arxiv.org/abs/1810.04805)
 
 &ensp;&ensp;做完上面的步骤之后只要执行下面的脚本即可
 
+&ensp;&ensp;export BERT_BASE_DIR=../modelParams/uncased_L-12_H-768_A-12
 
+&ensp;&ensp;export DATASET=../data/
 
+&ensp;&ensp;python run_classifier.py \
+  &ensp;&ensp;&ensp;&ensp;--data_dir=$MY_DATASET \
+  &ensp;&ensp;&ensp;&ensp;--task_name=imdb \
+  &ensp;&ensp;&ensp;&ensp;--vocab_file=$BERT_BASE_DIR/vocab.txt \
+  &ensp;&ensp;&ensp;&ensp;--bert_config_file=$BERT_BASE_DIR/bert_config.json \
+  &ensp;&ensp;&ensp;&ensp;--output_dir=../output/ \
+  &ensp;&ensp;&ensp;&ensp;--do_train=true \
+  &ensp;&ensp;&ensp;&ensp;--do_eval=true \
+  &ensp;&ensp;&ensp;&ensp;--init_checkpoint=$BERT_BASE_DIR/bert_model.ckpt \
+  &ensp;&ensp;&ensp;&ensp;--max_seq_length=200 \
+  &ensp;&ensp;&ensp;&ensp;--train_batch_size=16 \
+  &ensp;&ensp;&ensp;&ensp;--learning_rate=5e-5\
+  &ensp;&ensp;&ensp;&ensp;--num_train_epochs=3.0
+
+&ensp;&ensp;BERT模型用于文本分类的详细使用可以看我的博客[文本分类实战（十）—— BERT 预训练模型]()
 
 
