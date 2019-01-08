@@ -112,6 +112,18 @@ self-Attention机制，具体的介绍见[Transformer模型（Atention is all yo
 /ELMo/bilm/下是ELMo项目中的源码，/ELMo/modelParams/下是各种文件。
 
 #### 12. Bert预训练模型 文本分类
-&ensp;&ensp;敬请期待
+&ensp;&ensp;BERT模型来源于论文[BERT: Pre-training of Deep Bidirectional Transformers for
+Language Understanding](https://arxiv.org/abs/1810.04805)
+
+&ensp;&ensp;BERT模型是基于双向Transformer实现的语言模型，集预训练和下游任务于一个模型中，
+因此在使用的时候我们不需要搭建自己的下游任务模型，直接用BERT模型即可，我们将谷歌开源的源码下载
+下来放在bert文件夹中，在进行文本分类只需要修改run_classifier.py文件即可，另外我们需要将训练集
+和验证集分割后保存在两个不同的文件中，放置在/BERT/data下。然后还需要下载谷歌预训练好的模型放置在
+/BERT/modelParams文件夹下，还需要建一个output文件夹用来放置训练后的模型文件/BERT/output
+
+&ensp;&ensp;做完上面的步骤之后只要执行下面的脚本即可
+
+
+
 
 
