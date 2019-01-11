@@ -262,6 +262,7 @@ class IMDBProcessor(DataProcessor):
     def get_labels(self):
         return ["0", "1"]
 
+
 class XnliProcessor(DataProcessor):
   """Processor for the XNLI data set."""
 
@@ -299,7 +300,7 @@ class XnliProcessor(DataProcessor):
       if language != tokenization.convert_to_unicode(self.language):
         continue
       text_a = tokenization.convert_to_unicode(line[6])
-
+      text_b = tokenization.convert_to_unicode(line[7])
       label = tokenization.convert_to_unicode(line[1])
       examples.append(
           InputExample(guid=guid, text_a=text_a, text_b=text_b, label=label))
@@ -728,7 +729,7 @@ def model_fn_builder(bert_config, num_labels, init_checkpoint, learning_rate,
 
     output_spec = None
     if mode == tf.estimator.ModeKeys.TRAIN:
-
+      tf.logging.info("train loss: {}".format(total_loss))
       train_op = optimization.create_optimizer(
           total_loss, learning_rate, num_train_steps, num_warmup_steps, use_tpu)
 
@@ -742,8 +743,10 @@ def model_fn_builder(bert_config, num_labels, init_checkpoint, learning_rate,
       def metric_fn(per_example_loss, label_ids, logits, is_real_example):
         predictions = tf.argmax(logits, axis=-1, output_type=tf.int32)
         accuracy = tf.metrics.accuracy(
-            labels=label_ids, predictions=predictions, weights=is_real_example)
-        loss = tf.metrics.mean(values=per_example_loss, weights=is_real_example)
+            labels=label_ids, predictions=predictions, weights=is_real_example, name="evalAccuracy")
+        loss = tf.metrics.mean(values=per_example_loss, weights=is_real_example, name="evalLoss")
+        tf.logging.info("eval accuracy: {}".format(accuracy))
+        tf.logging.info("eval loss: {}".format(loss))
         return {
             "eval_accuracy": accuracy,
             "eval_loss": loss,
@@ -936,7 +939,10 @@ def main(_):
         seq_length=FLAGS.max_seq_length,
         is_training=True,
         drop_remainder=True)
-    estimator.train(input_fn=train_input_fn, max_steps=num_train_steps)
+    tensors_to_log = {"train loss": "loss/Mean:0"}
+    logging_hook = tf.train.LoggingTensorHook(
+        tensors=tensors_to_log, every_n_iter=100)
+    estimator.train(input_fn=train_input_fn, hooks=[logging_hook], max_steps=num_train_steps)
 
   if FLAGS.do_eval:
     eval_examples = processor.get_dev_examples(FLAGS.data_dir)
@@ -975,7 +981,10 @@ def main(_):
         is_training=False,
         drop_remainder=eval_drop_remainder)
 
-    result = estimator.evaluate(input_fn=eval_input_fn, steps=eval_steps)
+    tensors_to_log = {"eval accuracy": "evalAccuracy/value:0", "eval loss": "evalLoss/value:0"}
+    logging_hook = tf.train.LoggingTensorHook(
+        tensors=tensors_to_log, every_n_iter=50)
+    result = estimator.evaluate(input_fn=eval_input_fn, steps=eval_steps, hooks=[logging_hook])
 
     output_eval_file = os.path.join(FLAGS.output_dir, "eval_results.txt")
     with tf.gfile.GFile(output_eval_file, "w") as writer:

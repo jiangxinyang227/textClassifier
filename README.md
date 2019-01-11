@@ -119,7 +119,7 @@ Language Understanding](https://arxiv.org/abs/1810.04805)
 因此在使用的时候我们不需要搭建自己的下游任务模型，直接用BERT模型即可，我们将谷歌开源的源码下载
 下来放在bert文件夹中，在进行文本分类只需要修改run_classifier.py文件即可，另外我们需要将训练集
 和验证集分割后保存在两个不同的文件中，放置在/BERT/data下。然后还需要下载谷歌预训练好的模型放置在
-/BERT/modelParams文件夹下，还需要建一个output文件夹用来放置训练后的模型文件/BERT/output
+/BERT/modelParams文件夹下，还需要建一个/BERT/output文件夹用来放置训练后的模型文件
 
 &ensp;&ensp;做完上面的步骤之后只要执行下面的脚本即可
 
@@ -141,6 +141,7 @@ Language Understanding](https://arxiv.org/abs/1810.04805)
   &ensp;&ensp;&ensp;&ensp;--learning_rate=5e-5\
   &ensp;&ensp;&ensp;&ensp;--num_train_epochs=3.0
 
-&ensp;&ensp;BERT模型用于文本分类的详细使用可以看我的博客[文本分类实战（十）—— BERT 预训练模型]()
+&ensp;&ensp;BERT模型用于文本分类的详细使用可以看我的博客
+[文本分类实战（十）—— BERT 预训练模型](https://www.cnblogs.com/jiangxinyang/p/10241243.html)
 
 
