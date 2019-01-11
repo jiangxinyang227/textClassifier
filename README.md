@@ -4,7 +4,7 @@
 
 #### requirements
 * python==3.5.6
-* tensorflow==1.4.0
+* tensorflow-gpu==1.10.0
 
 #### 1. 数据集
 &ensp;&ensp;数据集为IMDB电影评论的情感分析数据集，总共有三个部分：
