@@ -743,13 +743,19 @@ def model_fn_builder(bert_config, num_labels, init_checkpoint, learning_rate,
       def metric_fn(per_example_loss, label_ids, logits, is_real_example):
         predictions = tf.argmax(logits, axis=-1, output_type=tf.int32)
         accuracy = tf.metrics.accuracy(
-            labels=label_ids, predictions=predictions, weights=is_real_example, name="evalAccuracy")
-        loss = tf.metrics.mean(values=per_example_loss, weights=is_real_example, name="evalLoss")
-        tf.logging.info("eval accuracy: {}".format(accuracy))
-        tf.logging.info("eval loss: {}".format(loss))
+            labels=label_ids, predictions=predictions, weights=is_real_example)
+        auc = tf.metrics.auc(labels=label_ids, predictions=predictions, weights=is_real_example)
+
+        precision = tf.metrics.precision(labels=label_ids, predictions=predictions, weights=is_real_example)
+        recall = tf.metrics.recall(labels=label_ids, predictions=predictions, weights=is_real_example)
+        loss = tf.metrics.mean(values=per_example_loss, weights=is_real_example)
+
         return {
-            "eval_accuracy": accuracy,
             "eval_loss": loss,
+            "eval_accuracy": accuracy,
+            "eval_auc": auc,
+            "eval_precision": precision,
+            "eval_recall": recall
         }
 
       eval_metrics = (metric_fn,
@@ -981,10 +987,7 @@ def main(_):
         is_training=False,
         drop_remainder=eval_drop_remainder)
 
-    tensors_to_log = {"eval accuracy": "evalAccuracy/value:0", "eval loss": "evalLoss/value:0"}
-    logging_hook = tf.train.LoggingTensorHook(
-        tensors=tensors_to_log, every_n_iter=50)
-    result = estimator.evaluate(input_fn=eval_input_fn, steps=eval_steps, hooks=[logging_hook])
+    result = estimator.evaluate(input_fn=eval_input_fn, steps=eval_steps)
 
     output_eval_file = os.path.join(FLAGS.output_dir, "eval_results.txt")
     with tf.gfile.GFile(output_eval_file, "w") as writer:
